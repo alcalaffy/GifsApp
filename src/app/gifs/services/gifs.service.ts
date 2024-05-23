@@ -5,8 +5,10 @@ import { Gif, SearchResponse } from '../interfaces/gifs.interface';
 @Injectable({providedIn: 'root'})
 export class GifsService {
 
-  constructor(private http:HttpClient){}
-  private _tagsHistory:string[]=[''];
+  constructor(private http:HttpClient){
+    this.loadLocalStorage();
+  }
+  private _tagsHistory:string[]=[];
   private apiKey:string='Lzaje5s143Hq3d2FAQw0Ae9NEtdcUGFB';
   private serviceUrl:string='https://api.giphy.com/v1/gifs';
   public gifsList:Gif[]=[];
@@ -47,5 +49,19 @@ export class GifsService {
     //de esta forma limita el dom a 10 elementos
     //se iran removiendo los ultimos elementos del array ya que se inserta en la posicion 0
     this._tagsHistory=this.tagsHistory.splice(0,10);
+
+    //guardamos el array en el localStorage usando stringify
+    this.saveLocalStorage();
+  }
+  private saveLocalStorage():void{
+    localStorage.setItem('history',JSON.stringify(this._tagsHistory));
+  }
+  private loadLocalStorage():void{
+    if(!localStorage.getItem('history')){return}
+    this._tagsHistory=JSON.parse(localStorage.getItem('history')!);
+    if(this._tagsHistory.length===0){
+      return;
+    }
+    this.searchTag(this._tagsHistory[0]);
   }
 }

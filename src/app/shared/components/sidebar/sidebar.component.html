@@ -3,6 +3,6 @@
   <hr class="text-white ">
 
   <div class="list-group list-reset">
-    <button *ngFor="let gif of tags" class="list-group-item list-group-item-action">{{gif | titlecase}}</button>
+    <button (click)="searchGif(gif)" *ngFor="let gif of tags" class="list-group-item list-group-item-action">{{gif | titlecase}} </button>
   </div>
 </div>
