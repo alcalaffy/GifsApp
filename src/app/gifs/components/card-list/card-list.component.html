@@ -1,12 +1,10 @@
 <div class="row">
-  <div class="col-md-3 col-sm-6" *ngFor="let gif of gifs">
-    <div class="card mb-2 text-center bg-dark">
-      <img [src]="gif.images.downsized_medium.url" [alt]="gif.title" class="card-img-top">
-      <div class="card-body text-white ">
-        <p class="card-text">
-         {{gif.title}}
-        </p>
-      </div>
-    </div>
-  </div>
+  <!-- gif esta vinculado a la property de gifs-card -->
+  <!-- gif realiza esto ya que se usa el valor dentro de su componente -->
+  <!-- gif es similar a ==i, i sera utilizada para acceder a los valores -->
+
+  <!-- gifs es el array en card-list -->
+   <!-- estamos iterando para crear elementos dentro de la lista -->
+  <gifs-card  [gif]="gif" *ngFor="let gif of gifs" class="col-md-3 col-sm-6">
+  </gifs-card>
 </div>
